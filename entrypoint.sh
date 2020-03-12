@@ -45,7 +45,9 @@ if [ "$1" = 'run' ]; then
     # fix ownership of files
     chown -R hybris $HYBRIS_HOME
     chmod +x hybrisserver.sh
-
+    chmod -R +x ${PLATFORM_HOME}/tomcat/bin 
+    chmod -R +x ${PLATFORM_HOME}/tomcat/conf 
+    chmod -R +x ${HYBRIS_HOME}/config/tomcat/conf 
     # if initialize system is wanted we do it before starting the hybris server
     if [ "$HYBRIS_INITIALIZE_SYSTEM" = "yes" ]; then
         # set ant environment
