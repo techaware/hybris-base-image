@@ -35,16 +35,18 @@ LABEL org.label-schema.vcs-ref=$VCS_REF \
 ARG DEBIAN_FRONTEND=noninteractive
 
 # hybris needs the JAVA_HOME environment variable even if java is in path
-ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
+# ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
+ENV JAVA_HOME=/usr/lib/jvm/default-java
 
 # hybris needs unzip and lsof for the solr server setup
 RUN    apt-get update \
     && apt-get install -y --no-install-recommends software-properties-common apt-utils ca-certificates net-tools curl unzip lsof wget \
     && add-apt-repository ppa:webupd8team/java \
-    && echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections \
-    && apt-get install -y oracle-java8-installer  \
+#     && echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections \
+#     && apt-get install -y oracle-java8-installer  \
     && apt-get autoclean && apt-get --purge -y autoremove \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/* /usr/lib/jvm/java-8-oracle/*src.zip
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/* 
+#     /usr/lib/jvm/java-8-oracle/*src.zip
 
 # copy gosu from buildcontainer over
 COPY --from=buildcontainer /usr/local/bin/gosu /usr/local/bin/gosu
