@@ -26,6 +26,8 @@ RUN set -x \
 FROM sapmachine:lts
 MAINTAINER Rahul Aware <rahul.aware@gmail.com>
 
+ARG HYBRIS_HOME=/home/hybris
+
 ARG VCS_REF
 LABEL org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.vcs-url="https://github.com/stefanleh/hybris-base-image"
