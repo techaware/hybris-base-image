@@ -1,4 +1,4 @@
-FROM ubuntu:latest as buildcontainer
+FROM sapmachine:lts as buildcontainer
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV GOSU_VERSION 1.11
