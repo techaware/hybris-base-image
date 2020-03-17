@@ -1,4 +1,4 @@
-FROM sapmachine:lts as buildcontainer
+FROM ubuntu:latest as buildcontainer
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV GOSU_VERSION 1.11
@@ -23,10 +23,8 @@ RUN set -x \
     && gosu nobody true
 
 
-FROM ubuntu:latest
-MAINTAINER Stefan Lehmann <stefan.lehmann@oxaion.de>
-
-ARG HYBRIS_HOME=/home/hybris
+FROM sapmachine:lts
+MAINTAINER Rahul Aware <rahul.aware@gmail.com>
 
 ARG VCS_REF
 LABEL org.label-schema.vcs-ref=$VCS_REF \
@@ -36,7 +34,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # hybris needs the JAVA_HOME environment variable even if java is in path
 # ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
-ENV JAVA_HOME=/usr/lib/jvm/default-java
+# ENV JAVA_HOME=/usr/lib/jvm/default-java
 
 # hybris needs unzip and lsof for the solr server setup
 RUN    apt-get update \
